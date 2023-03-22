@@ -12,27 +12,27 @@ URL = "https://api.openai.com/v1/chat/completions"
 
 def wishMe():
     hour=int(datetime.datetime.now().hour)
-    if(lang=='en-ind'):
+    if(lang=='english'):
         if(hour>=5 and hour<12):
-            return("Good Morning , How can i help you")
+            print("Good Morning , How can i help you")
         elif(hour>=12 and hour<=16):
-            return("Good afternoon , How can i help you")
+            print("Good afternoon , How can i help you")
         else:
-            return("Good evening , How can i help you")
-    elif(lang=='ta-IN'):
+            print("Good evening , How can i help you")
+    elif(lang=='tamilh'):
         if(hour>=5 and hour<12):
-            return("Good Morning "+" How can i help you")
+            print("Good Morning "+" How can i help you")
         elif(hour>=12 and hour<=16):
-            return("Good afternoon "+" How can i help you")
+            print("Good afternoon "+" How can i help you")
         else:
-            return("Good evening "+" How can i help you")
+            print("Good evening "+" How can i help you")
     else:
         if(hour>=5 and hour<12):
-            return("सुप्रभात मैं आपकी कैसे साहायता कर सकता हूँ")
+            print("सुप्रभात मैं आपकी कैसे साहायता कर सकता हूँ")
         elif(hour>=12 and hour<=16):
-            return("नमस्कार मैं आपकी कैसे साहायता कर सकता हूँ")
+            print("नमस्कार मैं आपकी कैसे साहायता कर सकता हूँ")
         else:
-            return("नमस्ते मैं आपकी कैसे साहायता कर सकता हूँ")
+            print("नमस्ते मैं आपकी कैसे साहायता कर सकता हूँ")
 
 def drought():
     eng_sol=['You can Use Plant species and varieties of crops that withstand dryness, hold water, and reduce the need for irrigation.  Melons, tomatoes, squash and beans are better suited to dry conditions',
@@ -50,11 +50,11 @@ def drought():
              'உங்கள் உங்கள் மண்ணின் நீர்ப்பிடிப்புத் திறனை மேம்படுத்தவும், ஆவியாதல் மற்றும் அரிப்பைக் குறைக்கவும் பயிர் எச்சங்களை உங்கள் வயலில் விடலாம்.',
              'மண்ணின் மண்ணின் மேற்பரப்பிலிருந்து அல்லது மேற்பரப்பிற்கு கீழே புதைக்கப்பட்ட தாவரங்களின் வேர்களுக்கு மெதுவாக நீர் சொட்ட அனுமதிப்பதன் மூலம் நீர் மற்றும் ஊட்டச்சத்துக்களை சேமிக்கும் திறன் கொண்ட சொட்டு நீர் பாசனத்தைப் பயன்படுத்தலாம்.']
     if(lang=='tamil'):
-        return(tam_sol)
+        print(tam_sol)
     elif(lang=='english'):
-        return(eng_sol)
+        print(eng_sol)
     else:
-        return(hin_sol)
+        print(hin_sol)
 
 
 def fertility():
@@ -71,11 +71,11 @@ def fertility():
              'உரம் அல்லது உரங்களைச் சேர்ப்பது மண்ணின் வளத்தை அதிகரிக்கலாம் ஆனால் மிகையாகாது, ஏனெனில் இது எதிர்காலத்தில் மண்ணின் மலட்டுத்தன்மையை அல்லது அருகிலுள்ள நீர்நிலைகளில் மாசுபாட்டை ஏற்படுத்தும்.']
     
     if(lang=='tamil'):
-        return(tam_sol)
+        print(tam_sol)
     elif(lang=='english'):
-        return(eng_sol)
+        print(eng_sol)
     else:
-        return(hin_sol)
+        print(hin_sol)
 
 
 
@@ -96,11 +96,11 @@ def money():
                'பிரதான் மந்திரி க்ரிஷி சிஞ்சாய் யோஜனா: பாசன வசதிகளை வழங்குதல், திறமையான நீர் பயன்பாட்டை ஊக்குவித்தல் மற்றும் கிராமப்புறங்களில் நீர் பாதுகாப்பு உள்கட்டமைப்பை மேம்படுத்துதல் ஆகியவற்றின் மூலம் பண்ணை உற்பத்தியை மேம்படுத்துவதை இந்த திட்டம் நோக்கமாகக் கொண்டுள்ளது']
 
     if(lang=='tamil'):
-        return(tam_sol)
+        print(tam_sol)
     elif(lang=='english'):
-        return(eng_sol)
+        print(eng_sol)
     else:
-        return(hin_sol)
+        print(hin_sol)
 
 def flood():
     eng_sol = ['Crop insurance: Farmers can purchase crop insurance to protect against crop losses due to floods. This can provide them with financial support to cover their losses and help them recover from the impact of floods.',
@@ -116,11 +116,11 @@ def flood():
                'வெள்ளத்தின் போது விவசாயிகள் தங்கள் கால்நடைகளை பாதுகாக்க நடவடிக்கை எடுக்கலாம்.']
 
     if(lang=='tamil'):
-        return(tam_sol)
+        print(tam_sol)
     elif(lang=='english'):
-        return(eng_sol)
+        print(eng_sol)
     else:
-        return(hin_sol)
+        print(hin_sol)
 
 
 def chatgpt(query):
@@ -138,12 +138,20 @@ def chatgpt(query):
     "Authorization": f"Bearer {openai.api_key}"
     }
 
-    response = requests.post(URL, headers=headers, json=payload, stream=False)
-    result=json.loads(response.content.decode('utf-8'))
-    final_result=(result['choices'][0]['message']['content'])
-    l=[]
-    l.append(final_result)
-    return(final_result)
+    try:
+        response = requests.post(URL, headers=headers, json=payload, stream=False)
+        result=json.loads(response.content.decode('utf-8'))
+        final_result=(result['choices'][0]['message']['content'])
+        print(final_result)
+    
+    except Exception as e:
+        if(lang=='english'):
+            print("We couldn't find any solution for the query")
+        elif(lang=='hindi'):
+            print('हमें इस प्रश्न का कोई हल नहीं मिला')
+        else:
+            print('இந்தக் கேள்விக்கு எங்களால் எந்த தீர்வையும் கண்டுபிடிக்க முடியவில்லை')
+
 
 
 def beggining():
@@ -166,16 +174,16 @@ def beggining():
         elif('ஹிந்தி' in query or 'hindi' in query):
             lang='hindi'
             # Change the input and output as hindi
-            return('अब अब भाषा हिंदी में है')
+            print('अब अब भाषा हिंदी में है')
 
         elif('tamil' in query or 'तमिल' in query):
             lang='tamil'
             # Change the input and output as tamil
-            return('இப்போது இப்போது மொழி இந்தியில் உள்ளது')
+            print('இப்போது இப்போது மொழி இந்தியில் உள்ளது')
         elif('अंग्रेजी' in query or 'इंग्लिश' in query or 'ஆங்கிலம்' in query):
             lang='english'
             # Change the input and output as english
-            return('now now the language is in english')
+            print('now now the language is in english')
         else:
             chatgpt(query)
 
